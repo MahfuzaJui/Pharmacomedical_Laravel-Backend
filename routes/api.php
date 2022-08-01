@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,3 +72,8 @@ Route::get('/appointments',[AdminController::class,'appDoctor'])->name('appDocto
 Route::get('/Doctorsapps', [AdminController::class, 'join']);
 Route::get('/chart', [AdminController::class, 'chart'])->name('chart')->middleware('ValidAdmin');
 Route::get('/downloadPdf', [AdminController::class, 'downloadPdf'])->name('downloadPdf')->middleware('ValidAdmin');
+
+
+//Login
+Route::post('/login',[LoginAPIController::class,'login']); 
+Route::post('/logout',[LoginAPIController::class,'logout']);
