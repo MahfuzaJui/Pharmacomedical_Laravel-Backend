@@ -11,20 +11,24 @@ class LoginAPIController extends Controller
 {
     //
     public function  login(Request $req){
+        
 
-        $user = Users::where('email',$req->email)->where('password',$req->password)->first();
+        $user = Users::where('email',$req->email)->where('password', md5($req->password))->first();
         if($user){
+            
+            
             $api_token = Str::random(64);
+    
             $token = new Token();
             $token->email = $user->email;
-            // $token->token = $api_token;
-            // $token->created_at = new DateTime();
+            $token->token = $api_token;
+            $token->created_at = new DateTime();
             $token->save();
-            // return $token;
-            return "hi";
+            return $token;
         }
+    
         return "No user found";
-        // return $user;
+    
 
 
     }
