@@ -16,34 +16,34 @@ use App\Http\Controllers\LoginAPIController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 Route::get('/Users/list',[AdminController::class,'list']);
 
 //----------------------------Admin----------------------------//
 Route::get('/chart', [AdminController::class, 'chart'])->name('chart')->middleware('ValidAdmin');
 Route::get('/admindash', [AdminController::class, 'admindash'])->name('admindash')->middleware('ValidAdmin');
-Route::get('/profileAdmin', [AdminController::class, 'profileAdmin'])->name('profileAdmin')->middleware('ValidAdmin');
-Route::post('/profileAdmin', [AdminController::class, 'profileEdit'])->name('profileAdmin')->middleware('ValidAdmin');
-Route::get('/list', [AdminController::class, 'list'])->name('listAdmin')->middleware('ValidAdmin');
+Route::get('/profileAdmin', [AdminController::class, 'profileAdmin']);
+Route::post('/profileAdmin', [AdminController::class, 'profileEdit']);
+Route::get('/list', [AdminController::class, 'list'])->name('listAdmin');
 Route::get('/searchUser', [AdminController::class, 'searchUser'])->name('searchUser')->middleware('ValidAdmin');
 Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 
-Route::get('/addUser', [AdminController::class, 'addUser'])->name('addUser')->middleware('ValidAdmin');
-Route::post('/addUser', [AdminController::class, 'addUserSubmit'])->name('addUser')->middleware('ValidAdmin');
-Route::get('/editUser/{name}', [AdminController::class, 'editUser'])->middleware('ValidAdmin');
-Route::post('/editUser', [AdminController::class, 'editUserSubmit'])->name('editUser')->middleware('ValidAdmin');
-Route::get('/deleteUser/{name}', [AdminController::class, 'deleteUser'])->middleware('ValidAdmin');
-Route::post('/deleteUser', [AdminController::class, 'deleteUserSubmit'])->name('deleteUser')->middleware('ValidAdmin');
+Route::get('/addUser', [AdminController::class, 'addUser']);
+Route::post('/addUser', [AdminController::class, 'addUserSubmit']);
+Route::get('/editUser/{userID}', [AdminController::class, 'editUser']);
+Route::post('/editUser/{userID}', [AdminController::class, 'editUserSubmit']);
+Route::get('/deleteUser/{userID}', [AdminController::class, 'deleteUser']);
+Route::post('/deleteUser/{userID}', [AdminController::class, 'deleteUserSubmit']);
 
 Route::get('/appointmentlist', [AdminController::class, 'applist']);
-Route::get('/addapp', [AdminController::class, 'addapp'])->name('addapp')->middleware('ValidAdmin');
-Route::post('/addapp', [AdminController::class, 'addappSubmit'])->name('addapp')->middleware('ValidAdmin');
-Route::get('/editapp/{appID}', [AdminController::class, 'editapp'])->name('editapp')->middleware('ValidAdmin');
-Route::post('/editapp', [AdminController::class, 'editappSubmit'])->name('editapp')->middleware('ValidAdmin');
-Route::get('/deleteapp/{appID}', [AdminController::class, 'deleteapp'])->name('deleteapp')->middleware('ValidAdmin');
-Route::post('/deleteapp', [AdminController::class, 'deleteappSubmit'])->name('deleteapp')->middleware('ValidAdmin');
+Route::get('/addapp', [AdminController::class, 'addapp']);
+Route::post('/addapp', [AdminController::class, 'addappSubmit']);
+Route::get('/editapp/{appID}', [AdminController::class, 'editapp']);
+Route::post('/editapp/{appID}', [AdminController::class, 'editappSubmit']);
+Route::get('/deleteapp/{appID}', [AdminController::class, 'deleteapp']);
+Route::post('/deleteapp/{appID}', [AdminController::class, 'deleteappSubmit']);
 Route::get('/searchApp', [AdminController::class, 'searchApp'])->name('searchApp')->middleware('ValidAdmin');
 
 
@@ -52,17 +52,17 @@ Route::get('/Itemlist', [AdminController::class, 'Itemlist']);
 Route::get('/searchProduct', [AdminController::class, 'searchProduct'])->name('searchProduct')->middleware('ValidAdmin');
 
 Route::get('/docreviews', [AdminController::class, 'docreviews']);
-Route::get('/deletereview/{doctorReviewID}', [AdminController::class, 'deletereviewSubmit'])->name('deletereview')->middleware('ValidAdmin');
+Route::get('/deletereview/{doctorReviewID}', [AdminController::class, 'deletereviewSubmit']);
 
 
 Route::get('/unverified', [AdminController::class, 'unverified']);
-Route::get('/accept/{name}', [AdminController::class, 'accept'])->name('accept')->middleware('ValidAdmin');
-Route::post('/accept', [AdminController::class, 'acceptSubmit'])->name('accept')->middleware('ValidAdmin');
-Route::get('/decline/{name}', [AdminController::class, 'decline'])->name('decline')->middleware('ValidAdmin');
-Route::get('/ban/{name}', [AdminController::class, 'ban'])->name('ban')->middleware('ValidAdmin');
-Route::post('/ban', [AdminController::class, 'banSubmit'])->name('ban')->middleware('ValidAdmin');
-Route::get('/unban/{name}', [AdminController::class, 'unban'])->name('unban')->middleware('ValidAdmin');
-Route::post('/unban', [AdminController::class, 'unbanSubmit'])->name('unban')->middleware('ValidAdmin');
+Route::get('/accept/{userID}', [AdminController::class, 'accept']);
+Route::post('/accept/{userID}', [AdminController::class, 'acceptSubmit']);
+Route::get('/decline/{userID}', [AdminController::class, 'decline']);
+Route::get('/ban/{userID}', [AdminController::class, 'ban']);
+Route::post('/ban/{userID}', [AdminController::class, 'banSubmit']);
+Route::get('/unban/{userID}', [AdminController::class, 'unban']);
+Route::post('/unban/{userID}', [AdminController::class, 'unbanSubmit']);
 
 
 
@@ -75,5 +75,7 @@ Route::get('/downloadPdf', [AdminController::class, 'downloadPdf'])->name('downl
 
 
 //Login
-Route::post('/login',[LoginAPIController::class,'login']); 
+Route::post('/login',[LoginAPIController::class,'login']);
 Route::post('/logout',[LoginAPIController::class,'logout']);
+Route::post('/registration',[LoginAPIController::class,'registration']);
+Route::post('/verify',[LoginAPIController::class,'verify']);
