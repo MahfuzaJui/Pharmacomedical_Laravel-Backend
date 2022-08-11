@@ -23,9 +23,10 @@ class LoginAPIController extends Controller
             $token->userID = $user->userID;
             $token->token = $api_token;
             $token->created_at = new DateTime();
-            if($user->role == "admin"){
-                $token->role = "admin";
-            }
+            $token->role=$user->role;
+            // if($user->role == "admin"){
+            //     $token->role = "admin";
+            // }
         
             $token->save();
             return $token;

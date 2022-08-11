@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
-
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -249,7 +249,9 @@ public function appDoctor(){
 public function addapp(){
     $patient = Users::select('userID')->get();
     $doctor = Doctor::select('doctorID')->get();
-    return view('admin.addapp')->with('patients', $patient)->with('doctors', $doctor);
+    // return view('admin.addapp')->with('patients', $patient)->with('doctors', $doctor);
+    
+    return [$patient,$doctor];
 }
 public function addappSubmit(Request $request){
 
@@ -268,6 +270,8 @@ public function addappSubmit(Request $request){
 //     ],
     
 // );
+
+
     $app = new Appointment();
 
     $app->appointmentDateTime = $request->appointmentDateTime;
@@ -378,14 +382,14 @@ public function accept(Request $request){
 public function acceptSubmit(Request $request){
     $user = Users::where('userID', $request->userID)->first();
 
-    $user->verified = $request->verified;
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->phoneNumber = $request->phoneNumber;
-    $user->password = md5($request->password);
-    $user->dob = $request->dob;
-    $user->gender = $request->gender;
-    $user->role = $request->role;
+    $user->verified = 'true';
+    $user->name = $user->name;
+    $user->email = $user->email;
+    $user->phoneNumber = $user->phoneNumber;
+    $user->password = md5($user->password);
+    $user->dob = $user->dob;
+    $user->gender = $user->gender;
+    $user->role = $user->role;
     $user->save();
 
     // return redirect()->route('listAdmin');
@@ -400,14 +404,14 @@ public function ban(Request $request){
 public function banSubmit(Request $request){
     $user = Users::where('userID', $request->userID)->first();
 
-    $user->verified = $request->verified;
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->phoneNumber = $request->phoneNumber;
-    $user->password = md5($request->password);
-    $user->dob = $request->dob;
-    $user->gender = $request->gender;
-    $user->role = $request->role;
+    $user->verified = 'banned';
+    $user->name = $user->name;
+    $user->email = $user->email;
+    $user->phoneNumber = $user->phoneNumber;
+    $user->password = md5($user->password);
+    $user->dob = $user->dob;
+    $user->gender = $user->gender;
+    $user->role = $user->role;
     $user->save();
 
     // return redirect()->route('listAdmin');
@@ -421,14 +425,14 @@ public function unban(Request $request){
 public function unbanSubmit(Request $request){
     $user = Users::where('userID', $request->userID)->first();
 
-    $user->verified = $request->verified;
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->phoneNumber = $request->phoneNumber;
-    $user->password = md5($request->password);
-    $user->dob = $request->dob;
-    $user->gender = $request->gender;
-    $user->role = $request->role;
+    $user->verified = 'true';
+    $user->name = $user->name;
+    $user->email = $user->email;
+    $user->phoneNumber = $user->phoneNumber;
+    $user->password = md5($user->password);
+    $user->dob = $user->dob;
+    $user->gender = $user->gender;
+    $user->role = $user->role;
     $user->save();
     // return redirect()->route('listAdmin');
     return $user;

@@ -34,16 +34,16 @@ Route::get('/addUser', [AdminController::class, 'addUser']);
 Route::post('/addUser', [AdminController::class, 'addUserSubmit']);
 Route::get('/editUser/{userID}', [AdminController::class, 'editUser']);
 Route::post('/editUser/{userID}', [AdminController::class, 'editUserSubmit']);
-Route::get('/deleteUser/{userID}', [AdminController::class, 'deleteUser']);
-Route::post('/deleteUser/{userID}', [AdminController::class, 'deleteUserSubmit']);
+Route::get('/deleteUser/{userID}', [AdminController::class, 'deleteUserSubmit']);
+// Route::post('/deleteUser/{userID}', [AdminController::class, 'deleteUserSubmit']);
 
 Route::get('/appointmentlist', [AdminController::class, 'applist']);
 Route::get('/addapp', [AdminController::class, 'addapp']);
 Route::post('/addapp', [AdminController::class, 'addappSubmit']);
 Route::get('/editapp/{appID}', [AdminController::class, 'editapp']);
 Route::post('/editapp/{appID}', [AdminController::class, 'editappSubmit']);
-Route::get('/deleteapp/{appID}', [AdminController::class, 'deleteapp']);
-Route::post('/deleteapp/{appID}', [AdminController::class, 'deleteappSubmit']);
+Route::get('/deleteapp/{appID}', [AdminController::class, 'deleteappSubmit']);
+// Route::post('/deleteapp/{appID}', [AdminController::class, 'deleteappSubmit']);
 Route::get('/searchApp', [AdminController::class, 'searchApp'])->name('searchApp')->middleware('ValidAdmin');
 
 
@@ -56,13 +56,13 @@ Route::get('/deletereview/{doctorReviewID}', [AdminController::class, 'deleterev
 
 
 Route::get('/unverified', [AdminController::class, 'unverified']);
-Route::get('/accept/{userID}', [AdminController::class, 'accept']);
-Route::post('/accept/{userID}', [AdminController::class, 'acceptSubmit']);
+Route::get('/accept/{userID}', [AdminController::class, 'acceptSubmit']);
+// Route::post('/accept/{userID}', [AdminController::class, 'acceptSubmit']);
 Route::get('/decline/{userID}', [AdminController::class, 'decline']);
-Route::get('/ban/{userID}', [AdminController::class, 'ban']);
-Route::post('/ban/{userID}', [AdminController::class, 'banSubmit']);
-Route::get('/unban/{userID}', [AdminController::class, 'unban']);
-Route::post('/unban/{userID}', [AdminController::class, 'unbanSubmit']);
+Route::get('/ban/{userID}', [AdminController::class, 'banSubmit']);
+//Route::post('/ban/{userID}', [AdminController::class, 'banSubmit']);
+Route::get('/unban/{userID}', [AdminController::class, 'unbanSubmit']);
+// Route::post('/unban/{userID}', [AdminController::class, 'unbanSubmit']);
 
 
 
@@ -79,3 +79,10 @@ Route::post('/login',[LoginAPIController::class,'login']);
 Route::post('/logout',[LoginAPIController::class,'logout']);
 Route::post('/registration',[LoginAPIController::class,'registration']);
 Route::post('/verify',[LoginAPIController::class,'verify']);
+
+
+//----------------------------Doctors----------------------------//
+Route::get('/homeDoctor', [DoctorsAPIController::class, 'homeDoctor'])->middleware('APIAuth');
+Route::get('/doctorProfile', [DoctorsAPIController::class, 'doctorProfile'])->middleware('APIAuth');;
+Route::post('/doctorFee', [DoctorsAPIController::class, 'doctorFee'])->middleware('APIAuth');;
+Route::get('/prescriptionsList', [DoctorsAPIController::class, 'prescriptionsList'])->middleware('APIAuth');;

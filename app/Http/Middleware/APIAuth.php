@@ -19,7 +19,7 @@ class APIAuth
     {
         $token = $request->header("Authorization");
         $token = json_decode($token);
-        $check_token = Token::where('token',$token->api_token)->where('expired_at',NULL)->first();
+        $check_token = Token::where('token',$token->access_token)->where('expired_at',NULL)->first();
         if ($check_token) {
             return $next($request);
 
